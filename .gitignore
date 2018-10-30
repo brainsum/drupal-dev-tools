@@ -1,0 +1,7 @@
+/vendor/
+/core/
+/modules/
+/tmp/
+
+/phpcs.xml
+/grumphp.yml

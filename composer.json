@@ -1,0 +1,56 @@
+{
+    "name": "brainsum/drupal-dev-tools",
+    "description": "Dev tools for Drupal development.",
+    "version": "0.1.0",
+    "type": "composer-plugin",
+    "license": "gpl-3.0",
+    "authors": [
+        {
+            "name": "mhavelant",
+            "email": "mhavelant@brainsum.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    },
+    "require": {
+        "php": "^7.0",
+        "composer-plugin-api": "^1.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+        "drupal-composer/drupal-security-advisories": "8.x-dev",
+        "drupal/coder": "^8.3",
+        "drupal/console": "^1.8",
+        "drupal/core": "^8.5",
+        "drupal/devel": "^1.2",
+        "drupal/examples": "1.x-dev",
+        "phpro/grumphp": "^0.14.2",
+        "roave/security-advisories": "dev-master",
+        "squizlabs/php_codesniffer": "^3.3",
+        "symfony/filesystem": "^3.0",
+        "wimg/php-compatibility": "^9.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Brainsum\\DrupalDevTools\\": "src/"
+        }
+    },
+    "extra": {
+        "class": "Brainsum\\DrupalDevTools\\Composer\\Plugin\\DevToolsPlugin"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Brainsum\\DrupalDevTools\\Composer\\Script\\Install::setup"
+        ],
+        "post-update-cmd": [
+            "Brainsum\\DrupalDevTools\\Composer\\Script\\Install::setup"
+        ]
+    }
+}
