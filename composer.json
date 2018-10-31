@@ -28,8 +28,13 @@
         "drupal/core": "^8.5",
         "drupal/devel": "^1.2",
         "drupal/examples": "1.x-dev",
+        "jakub-onderka/php-console-color": "^0.2.0",
+        "jakub-onderka/php-console-highlighter": "^0.4.0",
+        "jakub-onderka/php-parallel-lint": "^1.0",
+        "nikic/php-parser": "^4.1",
         "phpro/grumphp": "^0.14.2",
         "roave/security-advisories": "dev-master",
+        "sensiolabs/security-checker": "^5.0",
         "squizlabs/php_codesniffer": "^3.3",
         "symfony/filesystem": "^3.0",
         "wimg/php-compatibility": "^9.0"
