@@ -28,6 +28,7 @@
         "drupal/core": "^8.5",
         "drupal/devel": "^1.2",
         "drupal/examples": "1.x-dev",
+        "drush/drush": "^9.0",
         "jakub-onderka/php-console-color": "^0.2.0",
         "jakub-onderka/php-console-highlighter": "^0.4.0",
         "jakub-onderka/php-parallel-lint": "^1.0",
