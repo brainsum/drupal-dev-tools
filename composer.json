@@ -1,9 +1,9 @@
 {
     "name": "brainsum/drupal-dev-tools",
     "description": "Dev tools for Drupal development.",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "type": "composer-plugin",
-    "license": "gpl-3.0",
+    "license": "gpl-3.0-or-later",
     "authors": [
         {
             "name": "mhavelant",
