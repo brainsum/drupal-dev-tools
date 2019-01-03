@@ -18,7 +18,9 @@ class LintCommand {
    * LintCommand constructor.
    */
   public function __construct() {
-    $this->twig = new StubbedEnvironment(new \Twig_Loader_String());;
+    // @todo: The deprecated \Twig_Loader_String() was removed from the constructor.
+    // @todo: Maybe $this->twig->createTemplate() has to be used somewhere.
+    $this->twig = new StubbedEnvironment();
   }
 
   /**

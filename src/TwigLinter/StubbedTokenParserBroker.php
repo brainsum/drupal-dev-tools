@@ -8,6 +8,10 @@ use Twig_TokenParserBroker;
  * Broker providing stubs for all tags that are not defined.
  *
  * @author Alexander <iam.asm89@gmail.com>
+ *
+ * @deprecated
+ *
+ * @todo: Replace Twig_TokenParserBroker.
  */
 class StubbedTokenParserBroker extends Twig_TokenParserBroker {
 
@@ -36,6 +40,8 @@ class StubbedTokenParserBroker extends Twig_TokenParserBroker {
 
   /**
    * {@inheritdoc}
+   *
+   * \Twig_Parser
    */
   public function setParser(\Twig_ParserInterface $parser) {
     $this->parser = $parser;

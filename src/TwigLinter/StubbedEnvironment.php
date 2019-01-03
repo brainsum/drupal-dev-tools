@@ -38,7 +38,7 @@ class StubbedEnvironment extends \Twig_Environment {
    */
   public function getFilter($name) {
     if (!isset($this->stubFilters[$name])) {
-      $this->stubFilters[$name] = new \Twig_Filter_Function('stub');
+      $this->stubFilters[$name] = new \Twig_SimpleFilter('stub', 'stub');
     }
 
     return $this->stubFilters[$name];
@@ -49,7 +49,7 @@ class StubbedEnvironment extends \Twig_Environment {
    */
   public function getFunction($name) {
     if (!isset($this->stubFunctions[$name])) {
-      $this->stubFunctions[$name] = new \Twig_Function_Function('stub');
+      $this->stubFunctions[$name] = new \Twig_SimpleFunction('stub', 'stub');
     }
 
     return $this->stubFunctions[$name];
