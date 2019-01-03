@@ -35,8 +35,8 @@ class TwigLinter implements LinterInterface {
       $lintResults = $this->linter->run($file->getPathname());
     }
     catch (\Exception $exception) {
-      // @todo: What to do whit this?
-      $errors->add($exception->getMessage());
+      // @todo: What to do with this?
+      $errors->add(new SimpleString($exception->getMessage()));
     }
 
     if ($lintResults['failed'] > 0) {
