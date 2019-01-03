@@ -2,8 +2,6 @@
 
 namespace Brainsum\DrupalDevTools\TwigLinter;
 
-use Twig_TokenParserBroker;
-
 /**
  * Broker providing stubs for all tags that are not defined.
  *
@@ -13,10 +11,20 @@ use Twig_TokenParserBroker;
  *
  * @todo: Replace Twig_TokenParserBroker.
  */
-class StubbedTokenParserBroker extends Twig_TokenParserBroker {
+class StubbedTokenParserBroker extends \Twig_TokenParserBroker {
 
+  /**
+   * Parser.
+   *
+   * @var \Twig_Parser
+   */
   protected $parser;
 
+  /**
+   * Parsers.
+   *
+   * @var \Twig_TokenParser[]
+   */
   protected $parsers;
 
   /**
@@ -33,15 +41,8 @@ class StubbedTokenParserBroker extends Twig_TokenParserBroker {
 
   /**
    * {@inheritdoc}
-   */
-  public function getParser() {
-    return $this->parser;
-  }
-
-  /**
-   * {@inheritdoc}
    *
-   * \Twig_Parser
+   * @todo: \Twig_Parser as deprecation fix.
    */
   public function setParser(\Twig_ParserInterface $parser) {
     $this->parser = $parser;

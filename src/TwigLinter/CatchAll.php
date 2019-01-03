@@ -2,16 +2,12 @@
 
 namespace Brainsum\DrupalDevTools\TwigLinter;
 
-use Twig_Token;
-use Twig_TokenParser;
-use Twig_TokenStream;
-
 /**
  * Token parser for any block.
  *
  * @author Alexander <iam.asm89@gmail.com>
  */
-class CatchAll extends Twig_TokenParser {
+class CatchAll extends \Twig_TokenParser {
 
   private $name;
 
@@ -25,25 +21,25 @@ class CatchAll extends Twig_TokenParser {
   /**
    * {@inheritdoc}
    */
-  public function decideEnd(Twig_Token $token) {
+  public function decideEnd(\Twig_Token $token) {
     return $token->test('end' . $this->name);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function parse(Twig_Token $token) {
+  public function parse(\Twig_Token $token) {
     $stream = $this->parser->getStream();
 
-    while ($stream->getCurrent()->getType() !== Twig_Token::BLOCK_END_TYPE) {
+    while ($stream->getCurrent()->getType() !== \Twig_Token::BLOCK_END_TYPE) {
       $stream->next();
     }
 
-    $stream->expect(Twig_Token::BLOCK_END_TYPE);
+    $stream->expect(\Twig_Token::BLOCK_END_TYPE);
 
     if ($this->hasBody($stream)) {
       $this->parser->subparse([$this, 'decideEnd'], TRUE);
-      $stream->expect(Twig_Token::BLOCK_END_TYPE);
+      $stream->expect(\Twig_Token::BLOCK_END_TYPE);
     }
 
     return NULL;
@@ -59,14 +55,15 @@ class CatchAll extends Twig_TokenParser {
   /**
    * {@inheritdoc}
    */
-  private function hasBody(Twig_TokenStream $stream) {
+  private function hasBody(\Twig_TokenStream $stream) {
     $look = 0;
     while ($token = $stream->look($look)) {
-      if ($token->getType() === Twig_Token::EOF_TYPE) {
+      if ($token->getType() === \Twig_Token::EOF_TYPE) {
         return FALSE;
       }
 
-      if ($token->getType() === Twig_Token::NAME_TYPE
+      if (
+        $token->getType() === \Twig_Token::NAME_TYPE
         && $token->getValue() === 'end' . $this->name
       ) {
         return TRUE;
