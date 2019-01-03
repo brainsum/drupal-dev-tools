@@ -3,7 +3,9 @@
 namespace Brainsum\DrupalDevTools\TwigLinter;
 
 /**
- * Environment providing stubs for all filters, functions, tests and tags that
+ * Stub environment.
+ *
+ * Provides stubs for all filters, functions, tests and tags that
  * are not defined in twig's core.
  *
  * @author Alexander <iam.asm89@gmail.com>

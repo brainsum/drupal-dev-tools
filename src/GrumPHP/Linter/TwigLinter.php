@@ -2,9 +2,9 @@
 
 namespace Brainsum\DrupalDevTools\GrumPHP\Linter;
 
+use Brainsum\DrupalDevTools\TwigLinter\SimpleString;
 use GrumPHP\Collection\LintErrorsCollection;
 use GrumPHP\Linter\LinterInterface;
-use SplFileInfo;
 use Brainsum\DrupalDevTools\TwigLinter\LintCommand;
 
 /**
@@ -26,21 +26,23 @@ class TwigLinter implements LinterInterface {
   /**
    * {@inheritdoc}
    */
-  public function lint(SplFileInfo $file): LintErrorsCollection {
+  public function lint(\SplFileInfo $file): LintErrorsCollection {
     $errors = new LintErrorsCollection();
 
     $lintResults = [];
+
     try {
-      $lintResults = $this->linter->run($file);
+      $lintResults = $this->linter->run($file->getPathname());
     }
     catch (\Exception $exception) {
-      // @todo: Parse the exception.
-      $errors->add($exception);
+      // @todo: What to do whit this?
+      $errors->add($exception->getMessage());
     }
 
-    if ($lintResults['errors'] > 0) {
-      // @todo: Return errors instead.
-      $errors->add($file->getFilename() . ' is not valid twig.');
+    if ($lintResults['failed'] > 0) {
+      foreach ($lintResults['errors'] as $lintError) {
+        $errors->add(new SimpleString($lintError));
+      }
     }
 
     return $errors;

@@ -12,7 +12,7 @@ class StubbedCore extends \Twig_Extension_Core {
   /**
    * {@inheritdoc}
    */
-  protected function getTestNodeClass(\Twig_Parser $parser, $name) {
+  protected function getTestNodeClass(\Twig_Parser $parser, $name): string {
     return 'Twig_Node_Expression_Test';
   }
 

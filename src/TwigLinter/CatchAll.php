@@ -21,7 +21,7 @@ class CatchAll extends \Twig_TokenParser {
   /**
    * {@inheritdoc}
    */
-  public function decideEnd(\Twig_Token $token) {
+  public function decideEnd(\Twig_Token $token): bool {
     return $token->test('end' . $this->name);
   }
 
@@ -48,14 +48,14 @@ class CatchAll extends \Twig_TokenParser {
   /**
    * {@inheritdoc}
    */
-  public function getTag() {
+  public function getTag(): string {
     return $this->name;
   }
 
   /**
    * {@inheritdoc}
    */
-  private function hasBody(\Twig_TokenStream $stream) {
+  private function hasBody(\Twig_TokenStream $stream): bool {
     $look = 0;
     while ($token = $stream->look($look)) {
       if ($token->getType() === \Twig_Token::EOF_TYPE) {
