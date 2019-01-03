@@ -80,3 +80,19 @@ parameters:
       exception_on_invalid_type: false
       parse_constant: false
       parse_custom_tags: false
+    twig_lint: ~
+
+services:
+  linter.twig_lint:
+    class: Brainsum\DrupalDevTools\GrumPHP\Linter\TwigLinter
+    arguments:
+      - '@grumphp.util.filesystem'
+      - '@grumphp.io'
+
+  task.twig_lint:
+    class: Brainsum\DrupalDevTools\GrumPHP\Task\TwigLint
+    arguments:
+      - '@config'
+      - '@linter.twig_lint'
+    tags:
+      - { name: grumphp.task, config: twig_lint }

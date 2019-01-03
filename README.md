@@ -2,6 +2,24 @@
 
 Package / Composer plugin for standardizing development tools.
 
+## Setup
+### Preparation
+
+If you already have a ```grumphp.yml``` and/or ```phpcs.xml``` file in your project, you should rename them. E.g. ```mv grumphp.yml grumphp.yml.backup```
+If you want to add new tasks and rules on a case-by-case basis, check the ```grumphp.dist.yml``` and ```phpcs.dist.xml``` files of this package.
+Note: This package is not going to overwrite existing ones, but it might not work with them either.
+
+### Installation
+
+In your project, simply use
+
+```composer require --dev brainsum/drupal-dev-tools```
+
+### Settings
+
+The newly created ```grumphp.yml``` and ```phpcs.xml``` should now be created. They should be good to go, but you should take a look at them and customize them for the current project as necessary.
+E.g, phpcs.xml descriptions, namings, checked folders, etc.; grumphp.yml php version, etc.
+
 ## GrumPHP
 ### Commit message check
 
