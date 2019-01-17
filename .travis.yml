@@ -1,0 +1,38 @@
+dist: xenial
+sudo: false
+
+language: php
+
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: 7.3
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_install:
+  # disable xdebug if available
+  - phpenv config-rm xdebug.ini || echo "xdebug not available"
+  - composer validate
+  # Copy required files.
+  - cp phpcs.dist.xml phpcs.xml
+  - cp phpunit.dist.xml phpunit.xml
+  - cp grumphp.dist.yml grumphp.yml
+
+install:
+  - composer install --no-suggest --no-progress --no-interaction --prefer-dist -o
+
+script:
+  - vendor/bin/parallel-lint test
+  - vendor/bin/phpcs --standard=phpcs.xml test
+  - vendor/bin/parallel-lint src
+  - vendor/bin/phpcs --standard=phpcs.xml src
+  - vendor/bin/phpunit -c phpunit.xml
