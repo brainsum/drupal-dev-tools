@@ -24,7 +24,7 @@ E.g, phpcs.xml descriptions, namings, checked folders, etc.; grumphp.yml php ver
 ### Commit message check
 
 Commit messages have to conform to the following regexp:
-> `/([A-Z]+-[\d]+ )+\| [A-Z\d]([^.])+\./s`
+> `/^([A-Z]+-[\d]+ )+\| [A-Za-z\d\s\.]+([^.])+\.{1}$/s`
 
 This should be equivalent to the following convention:
 
