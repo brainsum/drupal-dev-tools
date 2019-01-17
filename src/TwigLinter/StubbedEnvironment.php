@@ -7,8 +7,6 @@ namespace Brainsum\DrupalDevTools\TwigLinter;
  *
  * Provides stubs for all filters, functions, tests and tags that
  * are not defined in twig's core.
- *
- * @author Alexander <iam.asm89@gmail.com>
  */
 class StubbedEnvironment extends \Twig_Environment {
 

@@ -4,8 +4,6 @@ namespace Brainsum\DrupalDevTools\TwigLinter;
 
 /**
  * Overridden core extension to stub tests.
- *
- * @author Alexander <iam.asm89@gmail.com>
  */
 class StubbedCore extends \Twig_Extension_Core {
 

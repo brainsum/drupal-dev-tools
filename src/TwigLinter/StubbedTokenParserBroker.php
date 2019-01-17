@@ -5,8 +5,6 @@ namespace Brainsum\DrupalDevTools\TwigLinter;
 /**
  * Broker providing stubs for all tags that are not defined.
  *
- * @author Alexander <iam.asm89@gmail.com>
- *
  * @deprecated
  *
  * @todo: Replace Twig_TokenParserBroker.

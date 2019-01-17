@@ -4,8 +4,6 @@ namespace Brainsum\DrupalDevTools\TwigLinter;
 
 /**
  * Token parser for any block.
- *
- * @author Alexander <iam.asm89@gmail.com>
  */
 class CatchAll extends \Twig_TokenParser {
 
