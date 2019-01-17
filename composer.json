@@ -47,7 +47,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Brainsum\\DrupalDevTools\\": "src/"
+            "Brainsum\\DrupalDevTools\\": "src/",
+            "Brainsum\\DrupalDevTools\\Test\\": "test/"
         }
     },
     "extra": {
