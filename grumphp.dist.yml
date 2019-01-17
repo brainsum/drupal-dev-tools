@@ -46,7 +46,7 @@ parameters:
       max_body_width: 72
       max_subject_width: 60
       matchers:
-        Must match regex: /([A-Z]+-[\d]+ )+\| [A-Z\d]([^.])+\./s
+        Must match regex: /^([A-Z]+-[\d]+ )+\| [A-Za-z\d\s\.]+([^.])+\.{1}$/s
       case_insensitive: false
       multiline: true
       additional_modifiers: ''
