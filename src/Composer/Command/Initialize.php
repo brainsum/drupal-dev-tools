@@ -15,9 +15,12 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class Initialize {
 
+  /**
+   * The names of the dist files.
+   */
   const DIST_FILES = [
-    'grumphp.dist.yml',
-    'phpcs.dist.xml',
+    'grumphp.yml',
+    'phpcs.xml',
   ];
 
   /**
@@ -76,16 +79,15 @@ class Initialize {
    *   The file.
    */
   protected function copyDistFile(string $file) {
-    $newFile = \str_replace('.dist', '', $file);
-
-    if ($this->fileSystem->exists("$this->projectRoot/$newFile")) {
+    if ($this->fileSystem->exists("$this->projectRoot/$file")) {
+      $this->console->info("\t$file already exists in the target folder. You have to updated its contents manually.");
       return;
     }
 
-    $this->console->write("Trying to create $newFile");
+    $this->console->write("Trying to create $file");
     $this->fileSystem->copy(
-      static::normalizePath("$this->packageRoot/$file"),
-      static::normalizePath("$this->projectRoot/$newFile")
+      static::normalizePath("$this->packageRoot/distfiles/$file"),
+      static::normalizePath("$this->projectRoot/distfiles/$file")
     );
   }
 
