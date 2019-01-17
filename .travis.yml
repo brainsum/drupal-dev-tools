@@ -21,6 +21,7 @@ cache:
 before_install:
   # disable xdebug if available
   - phpenv config-rm xdebug.ini || echo "xdebug not available"
+  - rm composer.lock
   - composer validate
   # Copy required files.
   - cp phpcs.dist.xml phpcs.xml
