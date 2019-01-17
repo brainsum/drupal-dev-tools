@@ -1,5 +1,9 @@
 # Brainsum dev tools for Drupal 8
 
+[![Build Status](https://travis-ci.org/brainsum/drupal-dev-tools.svg?branch=master)](https://travis-ci.org/brainsum/drupal-dev-tools)
+
+## About
+
 Package / Composer plugin for standardizing development tools.
 
 ## Setup
