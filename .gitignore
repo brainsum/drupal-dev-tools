@@ -6,3 +6,5 @@
 /phpcs.xml
 /grumphp.yml
 /phpunit.xml
+
+/composer.lock
