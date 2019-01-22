@@ -20,51 +20,46 @@ In your project, simply use
 ```composer require --dev brainsum/drupal-dev-tools```
 
 ### Settings
+#### Extend
+In the ```grumphp.yml``` file in your project, add the following:
+```
+imports:
+    - { resource: vendor/brainsum/drupal-dev-tools/distfiles/grumphp.yml }
+```
 
-The newly created ```grumphp.yml``` and ```phpcs.xml``` should now be created. They should be good to go, but you should take a look at them and customize them for the current project as necessary.
+This will signal grumphp to import everything from this package.
+
+You can customize the rules when needed, too:
+```
+parameters:
+    convention.git_commit_message_matchers: ['/^([A-Z]+-[\d]+ )+\| [A-Za-z\d\s\.]+([^.])+\.{1}$/s']
+```
+
+For more information, see:
+- [GrumPHP Conventions](https://github.com/phpro/grumphp/blob/master/doc/conventions.md)
+
+
+#### Override
+The files ```grumphp.yml``` and ```phpcs.xml``` should now be created in your project root.
+They should be good to go, but you should take a look at them and customize them for the current project as necessary.
 E.g, phpcs.xml descriptions, namings, checked folders, etc.; grumphp.yml php version, etc.
 
+If they, for some reason, don't get created, you can copy their contents from the files from ```vendor/brainsum/drupal-dev-tools/distfiles``` as needed.
+
 ## GrumPHP
-### Commit message check
+### Settings
 
-Commit messages have to conform to the following regexp:
-> `/^([A-Z]+-[\d]+ )+\| [A-Za-z\d\s\.]+([^.])+\.{1}$/s`
+For the pre-defined settings see ```distfiles/grumphp.yml```.
 
-This should be equivalent to the following convention:
+Note, we are also trying to create a ```phpcs.xml``` file in the project root. The source for that file is also in the ```distfiles``` folder.
 
-- One or more JIRA Task IDs separated with a space
-- One pipe (`|`) surrounded on both sides with a single space
-- The description of the task starting with an uppercase letter or number, ending with a single dot (`.`)
+### Twig lint
 
-#### Examples
+In addition to the pre-defined settings, this package also provides a custom ```twig lint``` task for GrumPHP.
 
-- Valid
-    - CAT-123 | My description.
-    - CAT-112 DOG-323 | 22 items added.
-- Invalid
-    - cAt-001 | My description.
-    - CAT-asd | Apple.
-    - CAT-111|description
-    - CAT-112 |description
-    - CAT-113| description
+This is a somewhat modified copy from [asm89/twig-lint](https://github.com/asm89/twig-lint).
 
-### Branch naming
-
-Branch naming has to conform to the following regexp:
-> `/([a-z]+-[A-Z]+-[\d]+)(-[a-zA-Z\d]+)*$/s`
-
-This should be equivalent to the following convention:
-
-- parent branch name
-- JIRA task ID
-- optional hyphenated description
-
-#### Examples
-
-- Valid
-    - master-JIRA-000
-    - master-JIRA-000-feature-update
-- Invalid
-    - JIRA-001
-    - my-feature
-    - master-JIRa-000
+The roadmap for this feature:
+- Update the code as necessary according to [symfony/twig-bridge](https://github.com/symfony/twig-bridge)
+- Show every error in the twig, not just the first one
+- Move to a separate package
