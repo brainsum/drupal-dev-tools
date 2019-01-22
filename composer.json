@@ -17,17 +17,19 @@
             "url": "https://packages.drupal.org/8"
         }
     },
+    "suggest": {
+        "drush/drush": "^9.0",
+        "drupal/core": "^8.5",
+        "drupal/console": "^1.8",
+        "drupal/devel": "^1.2",
+        "drupal/examples": "1.x-dev"
+    },
     "require": {
         "php": ">=7.0.8",
         "composer-plugin-api": "^1.1",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
         "drupal-composer/drupal-security-advisories": "8.x-dev",
         "drupal/coder": "^8.3",
-        "drupal/console": "^1.8",
-        "drupal/core": "^8.5",
-        "drupal/devel": "^1.2",
-        "drupal/examples": "1.x-dev",
-        "drush/drush": "^9.0",
         "jakub-onderka/php-console-color": "^0.2.0",
         "jakub-onderka/php-console-highlighter": "^0.4.0",
         "jakub-onderka/php-parallel-lint": "^1.0",
