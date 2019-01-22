@@ -27,6 +27,9 @@ class CommitRegexTest extends TestCase {
       ['EL-717 | Update Drupal core 8.6.3 to 8.6.5 in Composer lockfile.'],
       ['CAT-123 | My description.'],
       ['CAT-112 DOG-323 | 22 items added.'],
+      ['QAS-184 | Update commit message pattern.'],
+      ['QAS-18 QAS-4 | Update commit message pattern.'],
+      ['QAS-18 CAT-4 EL-11 | Update! Commit message pattern.'],
     ];
   }
 
