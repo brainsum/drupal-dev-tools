@@ -32,7 +32,7 @@ This will signal grumphp to import everything from this package.
 You can customize the rules when needed, too:
 ```
 parameters:
-    convention.git_commit_message_matchers: ['/^([A-Z]+-[\d]+ )+\| [A-Za-z\d\s\.]+([^.])+\.{1}$/s']
+    convention.git_commit_message_whitelist: ['/^([A-Z]+-[\d]+ )+\| [A-Za-z\d\s\.]+([^.])+\.{1}$/s']
 ```
 
 For more information, see:
