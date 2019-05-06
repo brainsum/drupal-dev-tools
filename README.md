@@ -24,7 +24,7 @@ In your project, simply use
 In the ```grumphp.yml``` file in your project, add the following:
 ```
 imports:
-    - { resource: vendor/brainsum/drupal-dev-tools/distfiles/grumphp.yml }
+    - { resource: vendor/brainsum/drupal-dev-tools/convention/grumphp.yml }
 ```
 
 This will signal grumphp to import everything from this package.
@@ -46,10 +46,13 @@ E.g, phpcs.xml descriptions, namings, checked folders, etc.; grumphp.yml php ver
 
 If they, for some reason, don't get created, you can copy their contents from the files from ```vendor/brainsum/drupal-dev-tools/distfiles``` as needed.
 
+If you just want to use some settings from ```grumphp.yml```, not the whole thing, see ```convention/grumphp.yml```, 
+as ```distfiles/grumphp.yml``` is only an import file and doesn't contain any other directives.
+
 ## GrumPHP
 ### Settings
 
-For the pre-defined settings see ```distfiles/grumphp.yml```.
+For the pre-defined settings see ```distfiles/grumphp.yml``` and ```convention/grumphp.yml```.
 
 Note, we are also trying to create a ```phpcs.xml``` file in the project root. The source for that file is also in the ```distfiles``` folder.
 
