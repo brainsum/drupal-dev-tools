@@ -87,7 +87,7 @@ class Initialize {
     $this->console->write("Trying to create $file");
     $this->fileSystem->copy(
       static::normalizePath("$this->packageRoot/distfiles/$file"),
-      static::normalizePath("$this->projectRoot/distfiles/$file")
+      static::normalizePath("$this->projectRoot/$file")
     );
   }
 
