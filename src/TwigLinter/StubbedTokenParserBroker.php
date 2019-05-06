@@ -5,7 +5,12 @@ namespace Brainsum\DrupalDevTools\TwigLinter;
 /**
  * Broker providing stubs for all tags that are not defined.
  *
+ * phpcs:disable
  * @deprecated
+ * phpcs:enable
+ *
+ * @note: drupal/coder newer versions (e.g. 8.3.3) add rules about the
+ * deprecated annotation which we don't want to use.
  *
  * @todo: Replace Twig_TokenParserBroker.
  */
