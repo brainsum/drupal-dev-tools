@@ -2,34 +2,47 @@
 
 namespace Brainsum\DrupalDevTools\TwigLinter;
 
+use Twig\Environment;
+use Twig\Loader\LoaderInterface;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
+use Twig\TwigTest;
+
 /**
  * Stub environment.
  *
  * Provides stubs for all filters, functions, tests and tags that
  * are not defined in twig's core.
  */
-class StubbedEnvironment extends \Twig_Environment {
+class StubbedEnvironment extends Environment {
 
   /**
    * Stubbed filters.
    *
-   * @var \Twig_SimpleFilter[]
+   * @var \Twig\TwigFilter[]
    */
   private $stubFilters;
 
   /**
    * Stubbed functions.
    *
-   * @var \Twig_SimpleFunction[]
+   * @var \Twig\TwigFunction[]
    */
   private $stubFunctions;
 
   /**
    * Stubbed tests.
    *
-   * @var \Twig_SimpleTest[]
+   * @var \Twig\TwigTest[]
    */
   private $stubTests;
+
+  /**
+   * Stubbed callable.
+   *
+   * @var \Closure
+   */
+  private $stubCallable;
 
   /**
    * Token parser broker.
@@ -41,14 +54,25 @@ class StubbedEnvironment extends \Twig_Environment {
   /**
    * {@inheritdoc}
    */
-  public function __construct(\Twig_LoaderInterface $loader = NULL, $options = []) {
+  public function __construct(LoaderInterface $loader = NULL, $options = []) {
+
     parent::__construct($loader, $options);
-
-    $this->addExtension(new StubbedCore());
-    $this->initExtensions();
-
-    $broker = new StubbedTokenParserBroker();
-    $this->parsers->addTokenParserBroker($broker);
+    $this->stubCallable = function () {
+      /* This will be used as stub filter, function or test */
+    };
+    $this->stubFilters   = [];
+    $this->stubFunctions = [];
+    if (isset($options['stub_tags'])) {
+      foreach ($options['stub_tags'] as $tag) {
+        $this->addTokenParser(new CatchAll($tag));
+      }
+    }
+    $this->stubTests = [];
+    if (isset($options['stub_tests'])) {
+      foreach ($options['stub_tests'] as $test) {
+        $this->stubTests[$test] = new TwigTest('stub', $this->stubCallable);
+      }
+    }
   }
 
   /**
@@ -56,7 +80,7 @@ class StubbedEnvironment extends \Twig_Environment {
    */
   public function getFilter($name) {
     if (!isset($this->stubFilters[$name])) {
-      $this->stubFilters[$name] = new \Twig_SimpleFilter('stub', function () {});
+      $this->stubFilters[$name] = new TwigFilter('stub', $this->stubCallable);
     }
 
     return $this->stubFilters[$name];
@@ -67,7 +91,7 @@ class StubbedEnvironment extends \Twig_Environment {
    */
   public function getFunction($name) {
     if (!isset($this->stubFunctions[$name])) {
-      $this->stubFunctions[$name] = new \Twig_SimpleFunction('stub', function () {});
+      $this->stubFunctions[$name] = new TwigFunction('stub', $this->stubCallable);
     }
 
     return $this->stubFunctions[$name];
@@ -77,11 +101,13 @@ class StubbedEnvironment extends \Twig_Environment {
    * {@inheritdoc}
    */
   public function getTest($name) {
-    if (!isset($this->stubTests[$name])) {
-      $this->stubTests[$name] = new \Twig_SimpleTest('stub', function () {});
+    $test = parent::getTest($name);
+
+    if ($test) {
+      return $test;
     }
 
-    return $this->stubTests[$name];
+    return $this->stubTests[$name] ?? FALSE;
   }
 
 }

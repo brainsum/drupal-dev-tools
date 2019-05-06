@@ -2,7 +2,17 @@
 
 namespace Brainsum\DrupalDevTools\TwigLinter;
 
+use RuntimeException;
+use SplFileInfo;
 use Symfony\Component\Finder\Finder;
+use Twig\Error\SyntaxError;
+use function file_get_contents;
+use function implode;
+use function is_dir;
+use function is_file;
+use function is_readable;
+use function preg_match;
+use function sprintf;
 
 /**
  * Command to lint twig files.
@@ -34,11 +44,11 @@ class LintCommand {
    */
   public function run(string $path): array {
     if (!$path) {
-      throw new \RuntimeException('Please provide a filename.');
+      throw new RuntimeException('Please provide a filename.');
     }
 
-    if (!\is_readable($path)) {
-      throw new \RuntimeException(\sprintf('File or directory "%s" is not readable', $path));
+    if (!is_readable($path)) {
+      throw new RuntimeException(sprintf('File or directory "%s" is not readable', $path));
     }
 
     $linted = 0;
@@ -47,13 +57,13 @@ class LintCommand {
 
     foreach ($this->fetchFiles($path) as $file) {
       ++$linted;
-      $lintErrors = $this->validate(\file_get_contents($file), $file);
+      $lintErrors = $this->validate(file_get_contents($file), $file);
 
       if (!empty($lintErrors)) {
         ++$failed;
         $filePath = $file->getPathname();
         $message = "The '$filePath' template is invalid\n";
-        $message .= \implode("\n", $lintErrors);
+        $message .= implode("\n", $lintErrors);
         $errors[] = $message;
       }
     }
@@ -79,14 +89,14 @@ class LintCommand {
   protected function fetchFiles(string $input, array $exclude = []): array {
     /** @var \SplFileInfo[] $files */
     $files = [];
-    if (\is_file($input)) {
-      $files = [new \SplFileInfo($input)];
+    if (is_file($input)) {
+      $files = [new SplFileInfo($input)];
     }
-    elseif (\is_dir($input)) {
+    elseif (is_dir($input)) {
       $files = Finder::create()->files()->in($input)->name('*.twig')->filter(
-        function (\SplFileInfo $file) use ($exclude) {
+        static function (SplFileInfo $file) use ($exclude) {
           foreach ($exclude as $excludeItem) {
-            if (1 === \preg_match('#' . $excludeItem . '#', $file->getRealPath())) {
+            if (1 === preg_match('#' . $excludeItem . '#', $file->getRealPath())) {
               return FALSE;
             }
           }
@@ -118,7 +128,7 @@ class LintCommand {
       // @todo: Investigate CatchAll, that should do that already.
       $this->twig->parse($this->twig->tokenize($template, $filename));
     }
-    catch (\Twig_Error $e) {
+    catch (SyntaxError $e) {
       $lineOfError = $e->getTemplateLine();
       $lintMessage = $e->getRawMessage();
 

@@ -2,28 +2,25 @@
 
 namespace Brainsum\DrupalDevTools\TwigLinter;
 
+use Twig\Extension\CoreExtension;
+
 /**
  * Overridden core extension to stub tests.
  */
-class StubbedCore extends \Twig_Extension_Core {
+class StubbedCore extends CoreExtension {
 
   /**
    * {@inheritdoc}
    */
-  protected function getTestNodeClass(\Twig_Parser $parser, $name): string {
+  protected function getTestNodeClass(): string {
     return 'Twig_Node_Expression_Test';
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getTestName(\Twig_Parser $parser, $line) {
-    try {
-      return parent::getTestName($parser, $line);
-    }
-    catch (\Twig_Error_Syntax $exception) {
-      return 'null';
-    }
+  protected function getTestName(): ?string {
+    return 'null';
   }
 
 }
