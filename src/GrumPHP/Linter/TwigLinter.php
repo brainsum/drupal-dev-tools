@@ -2,10 +2,13 @@
 
 namespace Brainsum\DrupalDevTools\GrumPHP\Linter;
 
+use Brainsum\DrupalDevTools\TwigLinter\LintCommand;
 use Brainsum\DrupalDevTools\TwigLinter\SimpleString;
+use Exception;
 use GrumPHP\Collection\LintErrorsCollection;
 use GrumPHP\Linter\LinterInterface;
-use Brainsum\DrupalDevTools\TwigLinter\LintCommand;
+use SplFileInfo;
+use function class_exists;
 
 /**
  * Twig linter service for GrumPHP.
@@ -26,7 +29,7 @@ class TwigLinter implements LinterInterface {
   /**
    * {@inheritdoc}
    */
-  public function lint(\SplFileInfo $file): LintErrorsCollection {
+  public function lint(SplFileInfo $file): LintErrorsCollection {
     $errors = new LintErrorsCollection();
 
     $lintResults = [];
@@ -34,7 +37,7 @@ class TwigLinter implements LinterInterface {
     try {
       $lintResults = $this->linter->run($file->getPathname());
     }
-    catch (\Exception $exception) {
+    catch (Exception $exception) {
       // @todo: What to do with this?
       $errors->add(new SimpleString($exception->getMessage()));
     }
@@ -52,7 +55,7 @@ class TwigLinter implements LinterInterface {
    * {@inheritdoc}
    */
   public function isInstalled(): bool {
-    return \class_exists(LintCommand::class);
+    return class_exists(LintCommand::class);
   }
 
 }

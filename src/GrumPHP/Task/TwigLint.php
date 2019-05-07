@@ -8,6 +8,8 @@ use GrumPHP\Task\AbstractLinterTask;
 use GrumPHP\Task\Context\ContextInterface;
 use GrumPHP\Task\Context\GitPreCommitContext;
 use GrumPHP\Task\Context\RunContext;
+use RuntimeException;
+use function count;
 
 /**
  * Twig Lint task for GrumPHP.
@@ -41,7 +43,7 @@ class TwigLint extends AbstractLinterTask {
 
     /** @var \GrumPHP\Collection\FilesCollection $files */
     $files = $context->getFiles()->name($extensions);
-    if (\count($whitelistPatterns) >= 1) {
+    if (count($whitelistPatterns) >= 1) {
       $files = $context->getFiles()
         ->paths($whitelistPatterns)
         ->name($extensions);
@@ -53,7 +55,7 @@ class TwigLint extends AbstractLinterTask {
     try {
       $lintErrors = $this->lint($files);
     }
-    catch (\RuntimeException $e) {
+    catch (RuntimeException $e) {
       return TaskResult::createFailed($this, $context, $e->getMessage());
     }
 

@@ -17,6 +17,13 @@ use Twig\TwigTest;
 class StubbedEnvironment extends Environment {
 
   /**
+   * Token parser broker.
+   *
+   * @var \Twig_TokenParserBroker
+   */
+  protected $parsers;
+
+  /**
    * Stubbed filters.
    *
    * @var \Twig\TwigFilter[]
@@ -45,13 +52,6 @@ class StubbedEnvironment extends Environment {
   private $stubCallable;
 
   /**
-   * Token parser broker.
-   *
-   * @var \Twig_TokenParserBroker
-   */
-  protected $parsers;
-
-  /**
    * {@inheritdoc}
    */
   public function __construct(LoaderInterface $loader = NULL, $options = []) {
@@ -60,7 +60,7 @@ class StubbedEnvironment extends Environment {
     $this->stubCallable = function () {
       /* This will be used as stub filter, function or test */
     };
-    $this->stubFilters   = [];
+    $this->stubFilters = [];
     $this->stubFunctions = [];
     if (isset($options['stub_tags'])) {
       foreach ($options['stub_tags'] as $tag) {

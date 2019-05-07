@@ -23,7 +23,7 @@ use Composer\Script\ScriptEvents;
  */
 class DevToolsPlugin implements PluginInterface, EventSubscriberInterface {
 
-  const PACKAGE_NAME = 'brainsum/drupal-dev-tools';
+  public const PACKAGE_NAME = 'brainsum/drupal-dev-tools';
 
   /**
    * Composer.
@@ -49,15 +49,7 @@ class DevToolsPlugin implements PluginInterface, EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public function activate(Composer $composer, IOInterface $io) {
-    $this->composer = $composer;
-    $this->io = $io;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       PackageEvents::POST_PACKAGE_INSTALL => 'postPackageInstall',
       PackageEvents::POST_PACKAGE_UPDATE => 'postPackageUpdate',
@@ -67,16 +59,11 @@ class DevToolsPlugin implements PluginInterface, EventSubscriberInterface {
   }
 
   /**
-   * Determine if the package is this package.
-   *
-   * @param \Composer\Package\PackageInterface $package
-   *   The package to inspect.
-   *
-   * @return bool
-   *   TRUE, if this is our package.
+   * {@inheritdoc}
    */
-  protected function isDevToolsPackage(PackageInterface $package): bool {
-    return $package->getName() === static::PACKAGE_NAME;
+  public function activate(Composer $composer, IOInterface $io): void {
+    $this->composer = $composer;
+    $this->io = $io;
   }
 
   /**
@@ -95,6 +82,19 @@ class DevToolsPlugin implements PluginInterface, EventSubscriberInterface {
     }
 
     $this->initScheduled = TRUE;
+  }
+
+  /**
+   * Determine if the package is this package.
+   *
+   * @param \Composer\Package\PackageInterface $package
+   *   The package to inspect.
+   *
+   * @return bool
+   *   TRUE, if this is our package.
+   */
+  protected function isDevToolsPackage(PackageInterface $package): bool {
+    return $package->getName() === static::PACKAGE_NAME;
   }
 
   /**

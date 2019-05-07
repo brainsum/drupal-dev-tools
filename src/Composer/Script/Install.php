@@ -14,7 +14,7 @@ class Install {
   /**
    * Setup routines.
    */
-  public static function setup() {
+  public static function setup(): void {
     $initCommand = new Initialize();
     $initCommand->execute();
   }

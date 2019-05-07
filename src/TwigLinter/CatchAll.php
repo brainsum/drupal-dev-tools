@@ -51,13 +51,6 @@ class CatchAll extends AbstractTokenParser {
   /**
    * {@inheritdoc}
    */
-  public function getTag(): string {
-    return $this->name;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   private function hasBody(TokenStream $stream): bool {
     $look = 0;
     // @todo: Handle exception?
@@ -77,6 +70,13 @@ class CatchAll extends AbstractTokenParser {
     }
 
     return FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getTag(): string {
+    return $this->name;
   }
 
 }
