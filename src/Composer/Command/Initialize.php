@@ -46,7 +46,7 @@ class Initialize {
    *
    * @var string
    */
-  protected $packageRoot;
+  protected $installedPackageRoot;
 
   /**
    * Console IO.
@@ -66,7 +66,7 @@ class Initialize {
      * @todo: Maybe this needs to be something more robust,
      *        but it should be OK for now.
      */
-    $this->packageRoot = static::normalizePath("$this->projectRoot/vendor/brainsum/drupal-dev-tools");
+    $this->installedPackageRoot = static::normalizePath("$this->projectRoot/vendor/brainsum/drupal-dev-tools");
     $this->console = new ConsoleIO(new StringInput(''), new ConsoleOutput(), new HelperSet());
   }
 
@@ -118,20 +118,20 @@ class Initialize {
   /**
    * Copy dist file to the project root.
    *
-   * @param string $file
-   *   The file.
+   * @param string $fileName
+   *   The file name.
    */
-  protected function copyDistFile(string $file): void {
-    $fileTarget = "{$this->projectRoot}/{$file}";
+  protected function copyDistFile(string $fileName): void {
+    $fileTarget = "{$this->projectRoot}/{$fileName}";
 
     if ($this->fileSystem->exists($fileTarget)) {
-      $this->console->info("\t{$file} already exists in the target folder. You have to update its contents manually.");
+      $this->console->info("\t{$fileName} already exists in the target folder. You have to update its contents manually.");
       return;
     }
 
-    $this->console->write("Trying to create $file");
+    $this->console->write("Trying to create {$fileName}");
     $this->fileSystem->copy(
-      static::normalizePath("{$this->packageRoot}/distfiles/{$file}"),
+      static::normalizePath(static::DISTFILES_DIR . "/{$fileName}"),
       static::normalizePath($fileTarget)
     );
   }
