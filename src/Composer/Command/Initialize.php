@@ -18,6 +18,8 @@ use function str_replace;
  */
 class Initialize {
 
+  protected const DISTFILES_DIR = __DIR__ . '/../../../distfiles';
+
   /**
    * The filesystem helper.
    *
@@ -60,8 +62,10 @@ class Initialize {
     $this->fileSystem = new Filesystem();
     $this->finder = new Finder();
     $this->projectRoot = getcwd();
-    // @todo: Maybe this needs to be something more robust, but it should be OK
-    // for now.
+    /*
+     * @todo: Maybe this needs to be something more robust,
+     *        but it should be OK for now.
+     */
     $this->packageRoot = static::normalizePath("$this->projectRoot/vendor/brainsum/drupal-dev-tools");
     $this->console = new ConsoleIO(new StringInput(''), new ConsoleOutput(), new HelperSet());
   }
@@ -91,12 +95,11 @@ class Initialize {
       ->ignoreDotFiles(TRUE)
       ->ignoreUnreadableDirs(TRUE)
       ->ignoreVCS(TRUE)
-      ->in($this->packageRoot);
+      ->in(static::DISTFILES_DIR);
 
     $files = [];
 
     foreach ($this->finder as $fileInfo) {
-      echo "\n" . $fileInfo->getRelativePathname() . "\n";
       $files[] = $fileInfo->getRelativePathname();
     }
 
