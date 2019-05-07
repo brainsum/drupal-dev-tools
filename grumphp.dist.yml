@@ -11,32 +11,32 @@ parameters:
       visitors:
         forbidden_function_calls:
           blacklist:
-          - 'var_dump'
-          - 'dpm'
-          - 'dvm'
+            - 'var_dump'
+            - 'dpm'
+            - 'dvm'
       triggered_by:
-      - php
-      - module
-      - inc
-      - install
-      - test
-      - profile
-      - theme
+        - 'php'
+        - 'module'
+        - 'inc'
+        - 'install'
+        - 'test'
+        - 'profile'
+        - 'theme'
     phpcs:
       standard: ~
       whitelist_patterns:
-      - /^web(.*)/
+        - /^web(.*)/
       ignore_patterns:
-      - cfg/
-      - libraries/
+        - cfg/
+        - libraries/
       triggered_by:
-      - php
-      - module
-      - inc
-      - install
-      - test
-      - profile
-      - theme
+        - 'php'
+        - 'module'
+        - 'inc'
+        - 'install'
+        - 'test'
+        - 'profile'
+        - 'theme'
     git_commit_message:
       allow_empty_message: false
       enforce_capitalized_subject: true
@@ -53,20 +53,20 @@ parameters:
       type_scope_conventions: []
     git_branch_name:
       whitelist:
-        - /([a-z]+-[A-Z]+-[\d]+)(-[a-zA-Z\d]+)*/s
+        - /([a-z]+-[A-Z]+-[\d]+)(-[a-zA-Z\d]+)*$/s
       additional_modifiers: ''
       allow_detached_head: true
     phplint:
       exclude: []
-      jobs: 5
+      jobs: ~
       triggered_by:
-      - php
-      - module
-      - inc
-      - install
-      - test
-      - profile
-      - theme
+        - 'php'
+        - 'module'
+        - 'inc'
+        - 'install'
+        - 'test'
+        - 'profile'
+        - 'theme'
     securitychecker:
       lockfile: ./composer.lock
       format: 'json'
@@ -81,6 +81,15 @@ parameters:
       parse_constant: false
       parse_custom_tags: false
     twig_lint: ~
+    phpstan:
+      triggered_by:
+        - 'php'
+        - 'module'
+        - 'inc'
+        - 'install'
+        - 'test'
+        - 'profile'
+        - 'theme'
 
 services:
   linter.twig_lint:
