@@ -6,15 +6,17 @@ namespace Brainsum\DrupalDevTools\Test\Regexp\Commit;
 
 use GrumPHP\Util\Regex;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
+use function preg_match;
 
 /**
  * Test for commit message regular expressions.
  *
  * @package Brainsum\DrupalDevToolsTest\Regexp\Commit
  */
-class CommitRegexTest extends TestCase {
+final class CommitRegexTest extends TestCase {
 
-  const REGEX = '/^([A-Z]+-[\d]+ )+\| [A-Za-z\d\s\.]+([^.])+\.{1}$/s';
+  private const REGEX = '/^([A-Z]+-[\d]+ )+\| [A-Za-z\d\s\.]+([^.])+\.{1}$/s';
 
   /**
    * Returns valid commit messages.
@@ -41,7 +43,7 @@ class CommitRegexTest extends TestCase {
    *
    * @dataProvider validCommitMessageProvider
    */
-  public function testValidCommitRegex(string $message) {
+  public function testValidCommitRegex(string $message): void {
     $this->assertTrue($this->regexMatcher($message), "'$message' does not match the regex, when it should.");
   }
 
@@ -69,7 +71,7 @@ class CommitRegexTest extends TestCase {
    *
    * @dataProvider invalidCommitMessageProvider
    */
-  public function testInvalidCommitRegex($message) {
+  public function testInvalidCommitRegex($message): void {
     $this->assertNotTrue($this->regexMatcher($message), "'$message' matches the regex, when it should not.");
   }
 
@@ -90,9 +92,9 @@ class CommitRegexTest extends TestCase {
     // @todo: Read this from the grumphp.yml?
     $regex->addPatternModifier('m');
 
-    $result = \preg_match((string) $regex, $message);
+    $result = preg_match((string) $regex, $message);
     if ($result === FALSE) {
-      throw new \RuntimeException("Error while matching '$message' with pattern '$regex");
+      throw new RuntimeException("Error while matching '$message' with pattern '$regex");
     }
 
     return (bool) $result;
