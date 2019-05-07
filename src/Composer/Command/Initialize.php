@@ -7,6 +7,7 @@ use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 use function getcwd;
 use function str_replace;
 
@@ -18,19 +19,18 @@ use function str_replace;
 class Initialize {
 
   /**
-   * The names of the dist files.
-   */
-  public const DIST_FILES = [
-    'grumphp.yml',
-    'phpcs.xml',
-  ];
-
-  /**
    * The filesystem helper.
    *
    * @var \Symfony\Component\Filesystem\Filesystem
    */
   protected $fileSystem;
+
+  /**
+   * File finder.
+   *
+   * @var \Symfony\Component\Finder\Finder
+   */
+  protected $finder;
 
   /**
    * The project root dir.
@@ -58,6 +58,7 @@ class Initialize {
    */
   public function __construct() {
     $this->fileSystem = new Filesystem();
+    $this->finder = new Finder();
     $this->projectRoot = getcwd();
     // @todo: Maybe this needs to be something more robust, but it should be OK
     // for now.
@@ -79,10 +80,34 @@ class Initialize {
   }
 
   /**
+   * Returns the distfiles.
+   *
+   * @return string[]
+   *   The distfile list.
+   */
+  public function distFiles(): array {
+    $this->finder
+      ->files()
+      ->ignoreDotFiles(TRUE)
+      ->ignoreUnreadableDirs(TRUE)
+      ->ignoreVCS(TRUE)
+      ->in($this->packageRoot);
+
+    $files = [];
+
+    foreach ($this->finder as $fileInfo) {
+      echo "\n" . $fileInfo->getRelativePathname() . "\n";
+      $files[] = $fileInfo->getRelativePathname();
+    }
+
+    return $files;
+  }
+
+  /**
    * Execute the command.
    */
   public function execute(): void {
-    foreach (static::DIST_FILES as $file) {
+    foreach ($this->distFiles() as $file) {
       $this->copyDistFile($file);
     }
   }
@@ -94,15 +119,17 @@ class Initialize {
    *   The file.
    */
   protected function copyDistFile(string $file): void {
-    if ($this->fileSystem->exists("$this->projectRoot/$file")) {
-      $this->console->info("\t$file already exists in the target folder. You have to updated its contents manually.");
+    $fileTarget = "{$this->projectRoot}/{$file}";
+
+    if ($this->fileSystem->exists($fileTarget)) {
+      $this->console->info("\t{$file} already exists in the target folder. You have to update its contents manually.");
       return;
     }
 
     $this->console->write("Trying to create $file");
     $this->fileSystem->copy(
-      static::normalizePath("$this->packageRoot/distfiles/$file"),
-      static::normalizePath("$this->projectRoot/$file")
+      static::normalizePath("{$this->packageRoot}/distfiles/{$file}"),
+      static::normalizePath($fileTarget)
     );
   }
 
