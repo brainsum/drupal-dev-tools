@@ -26,6 +26,7 @@ before_install:
   - cp phpcs.dist.xml phpcs.xml
   - cp phpunit.dist.xml phpunit.xml
   - cp grumphp.dist.yml grumphp.yml
+  - cp phpstan.dist.neon phpstan.neon
 
 install:
   - composer install --no-suggest --no-progress --no-interaction --prefer-dist -o
@@ -36,3 +37,5 @@ script:
   - vendor/bin/parallel-lint src
   - vendor/bin/phpcs --standard=phpcs.xml src
   - vendor/bin/phpunit -c phpunit.xml
+  - vendor/bin/phpstan analyze src
+  - vendor/bin/phpstan analyze test
