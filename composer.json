@@ -25,7 +25,7 @@
         "drupal/examples": "1.x-dev"
     },
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "composer-plugin-api": "^1.1",
         "composer/composer": "^1.8",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
