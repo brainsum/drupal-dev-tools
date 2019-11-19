@@ -17,6 +17,11 @@ use function class_exists;
  */
 class TwigLinter implements LinterInterface {
 
+  /**
+   * Twig linter command.
+   *
+   * @var \Brainsum\DrupalDevTools\TwigLinter\LintCommand
+   */
   protected $linter;
 
   /**

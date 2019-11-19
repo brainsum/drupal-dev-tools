@@ -22,6 +22,11 @@ use function sprintf;
  */
 class LintCommand {
 
+  /**
+   * Stubbed twig env.
+   *
+   * @var \Brainsum\DrupalDevTools\TwigLinter\StubbedEnvironment
+   */
   protected $twig;
 
   /**

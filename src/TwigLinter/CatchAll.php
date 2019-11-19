@@ -12,6 +12,11 @@ use Twig\TokenStream;
  */
 class CatchAll extends AbstractTokenParser {
 
+  /**
+   * Name of CatchAll parser.
+   *
+   * @var string
+   */
   private $name;
 
   /**
