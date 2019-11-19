@@ -1,2 +1,2 @@
 includes:
-	- vendor/brainsum/drupal-dev-tools/distfiles/phpstan.neon
+	- vendor/brainsum/drupal-dev-tools/convention/phpstan.neon
