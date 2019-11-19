@@ -45,7 +45,7 @@ parameters:
       enforce_single_lined_subject: true
       max_body_width: 72
       max_subject_width: 60
-      whitelist:
+      matchers:
         - /^([A-Z]+-[\d]+ )+\| [A-Za-z\d\s\.]+([^.])+\.{1}$/s
       case_insensitive: false
       multiline: true
