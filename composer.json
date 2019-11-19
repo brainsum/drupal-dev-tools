@@ -27,6 +27,7 @@
     "require": {
         "php": "^7.1",
         "composer-plugin-api": "^1.1",
+        "composer/composer": "^1.8",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
         "drupal-composer/drupal-security-advisories": "8.x-dev",
         "drupal/coder": "^8.3",
