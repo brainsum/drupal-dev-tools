@@ -55,9 +55,8 @@ class StubbedEnvironment extends Environment {
    * {@inheritdoc}
    */
   public function __construct(LoaderInterface $loader = NULL, $options = []) {
-
     parent::__construct($loader, $options);
-    $this->stubCallable = function () {
+    $this->stubCallable = static function () {
       /* This will be used as stub filter, function or test */
     };
     $this->stubFilters = [];
@@ -76,29 +75,59 @@ class StubbedEnvironment extends Environment {
   }
 
   /**
-   * {@inheritdoc}
+   * Get a filter by name.
+   *
+   * Subclasses may override this method and load filters differently;
+   * so no list of filters is available.
+   *
+   * @param string $name
+   *   The filter name.
+   *
+   * @return \Twig\TwigFilter|false
+   *   The filter instance.
+   *
+   * @internal
    */
   public function getFilter($name) {
     if (!isset($this->stubFilters[$name])) {
       $this->stubFilters[$name] = new TwigFilter('stub', $this->stubCallable);
     }
 
-    return $this->stubFilters[$name];
+    return $this->stubFilters[$name] ?? FALSE;
   }
 
   /**
-   * {@inheritdoc}
+   * Get a function by name.
+   *
+   * Subclasses may override this method and load functions differently;
+   * so no list of functions is available.
+   *
+   * @param string $name
+   *   Function name.
+   *
+   * @return \Twig\TwigFunction|false
+   *   The function instance.
+   *
+   * @internal
    */
   public function getFunction($name) {
     if (!isset($this->stubFunctions[$name])) {
       $this->stubFunctions[$name] = new TwigFunction('stub', $this->stubCallable);
     }
 
-    return $this->stubFunctions[$name];
+    return $this->stubFunctions[$name] ?? FALSE;
   }
 
   /**
-   * {@inheritdoc}
+   * Gets a test by name.
+   *
+   * @param string $name
+   *   The test name.
+   *
+   * @return \Twig\TwigTest|false
+   *   The test instance or FALSE.
+   *
+   * @internal
    */
   public function getTest($name) {
     $test = parent::getTest($name);
