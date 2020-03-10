@@ -8,7 +8,6 @@ use GrumPHP\Task\AbstractLinterTask;
 use GrumPHP\Task\Context\ContextInterface;
 use GrumPHP\Task\Context\GitPreCommitContext;
 use GrumPHP\Task\Context\RunContext;
-use phpDocumentor\Reflection\Types\Static_;
 use RuntimeException;
 use function count;
 
