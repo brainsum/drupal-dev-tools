@@ -101,7 +101,6 @@ services:
   task.twig_lint:
     class: Brainsum\DrupalDevTools\GrumPHP\Task\TwigLint
     arguments:
-      - '@config'
       - '@linter.twig_lint'
     tags:
-      - { name: grumphp.task, config: twig_lint }
+      - { name: grumphp.task, task: twig_lint }

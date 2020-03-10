@@ -8,6 +8,7 @@ use GrumPHP\Task\AbstractLinterTask;
 use GrumPHP\Task\Context\ContextInterface;
 use GrumPHP\Task\Context\GitPreCommitContext;
 use GrumPHP\Task\Context\RunContext;
+use phpDocumentor\Reflection\Types\Static_;
 use RuntimeException;
 use function count;
 
@@ -37,7 +38,7 @@ class TwigLint extends AbstractLinterTask {
    */
   public function run(ContextInterface $context): TaskResultInterface {
     /** @var array $config */
-    $config = $this->getConfiguration();
+    $config = static::getConfigurableOptions()->resolve();
     $whitelistPatterns = $config['whitelist_patterns'] ?? [];
     $extensions = '/\.(twig)$/i';
 
