@@ -28,7 +28,7 @@ class TwigLinter implements LinterInterface {
    * TwigLinter constructor.
    */
   public function __construct() {
-    $this->linter = new LintCommand();
+    // $this->linter = new LintCommand();
   }
 
   /**
