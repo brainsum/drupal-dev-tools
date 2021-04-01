@@ -56,22 +56,22 @@ class StubbedEnvironment extends Environment {
    */
   public function __construct(LoaderInterface $loader = NULL, $options = []) {
     parent::__construct($loader, $options);
-    $this->stubCallable = static function () {
+    // $this->stubCallable = static function () {
       /* This will be used as stub filter, function or test */
-    };
-    $this->stubFilters = [];
-    $this->stubFunctions = [];
-    if (isset($options['stub_tags'])) {
-      foreach ($options['stub_tags'] as $tag) {
-        $this->addTokenParser(new CatchAll($tag));
-      }
-    }
-    $this->stubTests = [];
-    if (isset($options['stub_tests'])) {
-      foreach ($options['stub_tests'] as $test) {
-        $this->stubTests[$test] = new TwigTest('stub', $this->stubCallable);
-      }
-    }
+    // };
+    // $this->stubFilters = [];
+    // $this->stubFunctions = [];
+    // if (isset($options['stub_tags'])) {
+    //   foreach ($options['stub_tags'] as $tag) {
+    //     $this->addTokenParser(new CatchAll($tag));
+    //   }
+    // }
+    // $this->stubTests = [];
+    // if (isset($options['stub_tests'])) {
+    //   foreach ($options['stub_tests'] as $test) {
+    //     $this->stubTests[$test] = new TwigTest('stub', $this->stubCallable);
+    //   }
+    // }
   }
 
   /**
