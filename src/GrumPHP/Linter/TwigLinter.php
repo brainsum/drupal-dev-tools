@@ -36,6 +36,7 @@ class TwigLinter implements LinterInterface {
    */
   public function lint(SplFileInfo $file): LintErrorsCollection {
     $errors = new LintErrorsCollection();
+    return $errors;
 
     $lintResults = [];
 
@@ -60,7 +61,8 @@ class TwigLinter implements LinterInterface {
    * {@inheritdoc}
    */
   public function isInstalled(): bool {
-    return class_exists(LintCommand::class);
+    return FALSE;
+    // return class_exists(LintCommand::class);
   }
 
 }
