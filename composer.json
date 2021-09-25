@@ -28,7 +28,7 @@
         "php": ">=7.3 <8",
         "composer-plugin-api": "^1.1 || ^2",
         "composer/composer": "^2.0",
-        "dealerdirect/phpcodesniffer-composer-installer": "v0.6.2",
+        "dealerdirect/phpcodesniffer-composer-installer": "v0.7.1",
         "drupal-composer/drupal-security-advisories": "8.x-dev",
         "drupal/coder": "^8.3",
         "jakub-onderka/php-console-color": "^0.2.0",
