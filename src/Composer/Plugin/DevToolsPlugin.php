@@ -21,49 +21,65 @@ use Composer\Script\ScriptEvents;
  *
  * @see https://github.com/phpro/grumphp/blob/master/src/Composer/GrumPHPPlugin.php
  */
+
+/**
+ * @psalm-suppress MissingConstructor
+ */
 class DevToolsPlugin implements PluginInterface, EventSubscriberInterface {
 
-  public const PACKAGE_NAME = 'brainsum/drupal-dev-tools';
+  private const PACKAGE_NAME = 'brainsum/drupal-dev-tools';
 
   /**
-   * Composer.
-   *
-   * @var \Composer\Composer
+   * @var Composer
    */
-  protected $composer;
+  private $composer;
 
   /**
-   * Composer IO helper.
-   *
-   * @var \Composer\IO\IOInterface
+   * @var IOInterface
    */
-  protected $io;
+  private $io;
 
   /**
-   * Flag for initializing.
-   *
    * @var bool
    */
-  protected $initScheduled = FALSE;
+  private $initScheduled = false;
 
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents(): array {
-    return [
-      PackageEvents::POST_PACKAGE_INSTALL => 'postPackageInstall',
-      PackageEvents::POST_PACKAGE_UPDATE => 'postPackageUpdate',
-      ScriptEvents::POST_INSTALL_CMD => 'runScheduledTasks',
-      ScriptEvents::POST_UPDATE_CMD => 'runScheduledTasks',
-    ];
+  public function activate(Composer $composer, IOInterface $io): void
+  {
+      $this->composer = $composer;
+      $this->io = $io;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function activate(Composer $composer, IOInterface $io): void {
-    $this->composer = $composer;
-    $this->io = $io;
+  public function deactivate(Composer $composer, IOInterface $io): void
+  {
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function uninstall(Composer $composer, IOInterface $io): void
+  {
+  }
+
+  /**
+   * Attach package installation events:.
+   *
+   * {@inheritdoc}
+   */
+  public static function getSubscribedEvents(): array
+  {
+    return [
+        PackageEvents::POST_PACKAGE_INSTALL => 'postPackageInstall',
+        PackageEvents::POST_PACKAGE_UPDATE => 'postPackageUpdate',
+        ScriptEvents::POST_INSTALL_CMD => 'runScheduledTasks',
+        ScriptEvents::POST_UPDATE_CMD => 'runScheduledTasks',
+    ];
   }
 
   /**
@@ -72,7 +88,8 @@ class DevToolsPlugin implements PluginInterface, EventSubscriberInterface {
    * @param \Composer\Installer\PackageEvent $event
    *   The post install event.
    */
-  public function postPackageInstall(PackageEvent $event) {
+  public function postPackageInstall(PackageEvent $event): void
+  {
     /** @var \Composer\DependencyResolver\Operation\InstallOperation $operation */
     $operation = $event->getOperation();
     $package = $operation->getPackage();
@@ -93,7 +110,8 @@ class DevToolsPlugin implements PluginInterface, EventSubscriberInterface {
    * @return bool
    *   TRUE, if this is our package.
    */
-  protected function isDevToolsPackage(PackageInterface $package): bool {
+  protected function isDevToolsPackage(PackageInterface $package): bool
+  {
     return $package->getName() === static::PACKAGE_NAME;
   }
 
@@ -103,7 +121,8 @@ class DevToolsPlugin implements PluginInterface, EventSubscriberInterface {
    * @param \Composer\Installer\PackageEvent $event
    *   The post install event.
    */
-  public function postPackageUpdate(PackageEvent $event) {
+  public function postPackageUpdate(PackageEvent $event): void
+  {
     /** @var \Composer\DependencyResolver\Operation\UpdateOperation $operation */
     $operation = $event->getOperation();
     $package = $operation->getTargetPackage();
@@ -118,7 +137,8 @@ class DevToolsPlugin implements PluginInterface, EventSubscriberInterface {
   /**
    * Run tasks which need to run.
    */
-  public function runScheduledTasks() {
+  public function runScheduledTasks(): void
+  {
     if ($this->initScheduled) {
       $this->initDevTools();
     }
@@ -127,7 +147,8 @@ class DevToolsPlugin implements PluginInterface, EventSubscriberInterface {
   /**
    * Helper for initializing the package.
    */
-  protected function initDevTools() {
+  protected function initDevTools(): void
+  {
     $initCommand = new Initialize();
     $initCommand->execute();
   }
