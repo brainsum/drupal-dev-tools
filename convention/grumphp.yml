@@ -85,3 +85,12 @@ grumphp:
         - theme
         - feature
         - test
+    twigcs:
+      ruleset: 'Brainsum\Twigcs\Ruleset\DrupalTwigcs'
+      triggered_by: [ 'twig' ]
+      exclude: [
+        'vendor',
+        'web/core',
+        'web/modules/contrib',
+        'web/themes/contrib',
+      ]
