@@ -1,2 +1,6 @@
 imports:
   - { resource: vendor/brainsum/drupal-dev-tools/convention/grumphp.yml }
+
+parameters:
+  git_commit_message_matchers:
+    Must contain JIRA issue number: '/^((JIRA\-)(\d+ ))+\| [A-Za-z]+[A-Za-z\d\s\.]+(.*)\.{1}$/s'

@@ -1,41 +1,25 @@
 parameters:
-  bin_dir: "./vendor/bin"
-  git_dir: "."
+  webroot: './web'
+  git_commit_message_matchers:
+    Must contain JIRA issue number: '/^([A-Z]\-(\d+ ))+\| [A-Za-z]+[A-Za-z\d\s\.]+(.*)\.{1}$/s'
+  exec_grumphp_command: docker-compose run --rm -T php
+
+grumphp:
+  ascii:
+    failed: vendor/phpro/grumphp/resources/ascii/failed.txt
+    succeeded: vendor/phpro/grumphp/resources/ascii/succeeded.txt
+  environment:
+    variables:
+      GRUMPHP_PROJECT_DIR: "."
+      GRUMPHP_GIT_WORKING_DIR: "./"
+      GRUMPHP_BIN_DIR: "vendor/bin/"
+      GRUMPHP_GIT_REPOSITORY_DIR: ".git"
+  git_hook_variables:
+    EXEC_GRUMPHP_COMMAND: '%exec_grumphp_command%'
+  extensions:
+    - GrumphpDrupalCheck\ExtensionLoader
+  hooks_dir: ~
   tasks:
-    composer: ~
-    composer_normalize: ~
-    phpparser:
-      ignore_patterns: []
-      kind: php7
-      visitors:
-        forbidden_function_calls:
-          blacklist:
-            - 'var_dump'
-            - 'dpm'
-            - 'dvm'
-      triggered_by:
-        - 'php'
-        - 'module'
-        - 'inc'
-        - 'install'
-        - 'test'
-        - 'profile'
-        - 'theme'
-    phpcs:
-      standard: ~
-      whitelist_patterns:
-        - /^web(.*)/
-      ignore_patterns:
-        - cfg/
-        - libraries/
-      triggered_by:
-        - 'php'
-        - 'module'
-        - 'inc'
-        - 'install'
-        - 'test'
-        - 'profile'
-        - 'theme'
     git_commit_message:
       allow_empty_message: false
       enforce_capitalized_subject: true
@@ -55,6 +39,8 @@ parameters:
         - /([a-z]+-[A-Z]+-[\d]+)(-[a-zA-Z\d]+)*$/s
       additional_modifiers: ''
       allow_detached_head: true
+    composer: ~
+    composer_normalize: ~
     phplint:
       triggered_by:
         - php
@@ -65,14 +51,30 @@ parameters:
         - theme
         - feature
         - test
-    yamllint: ~
-    jsonlint: ~
+    phpcs:
+      encoding: utf-8
+      triggered_by:
+        - php
+        - inc
+        - module
+        - install
+        - profile
+        - theme
+        - feature
+        - info
+        - txt
+        - md
+        - js
+        - test
+      standard: Drupal,DrupalPractice
     drupalcheck:
       drupal_root: ~
       deprecations: true
+    yamllint: ~
+    jsonlint: ~
     phpcpd:
       directory:
-        - ./web/*/custom
+        - '%webroot%/*/custom'
         - ./tests
       triggered_by:
         - php
@@ -81,18 +83,5 @@ parameters:
         - install
         - profile
         - theme
-    securitychecker:
-      lockfile: ./composer.lock
-      format: 'json'
-      end_point: ~
-      timeout: ~
-      run_always: false
-    phpstan:
-      triggered_by:
-        - 'php'
-        - 'module'
-        - 'inc'
-        - 'install'
-        - 'test'
-        - 'profile'
-        - 'theme'
+        - feature
+        - test

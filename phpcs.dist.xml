@@ -24,7 +24,7 @@
     <description>A custom coding standard.</description>
 
     <!-- Check for cross-version support. -->
-    <config name="testVersion" value="7.1-"/>
+    <config name="testVersion" value="8.1-"/>
 
     <arg name="extensions" value="php,module,inc,install,test,profile,theme" />
     <arg name="ignore" value="*.md" />
