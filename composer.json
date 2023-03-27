@@ -24,7 +24,7 @@
         "php": ">=8.1",
         "composer-plugin-api": "^1.1 || ^2",
         "drupal/core-dev": "^9.4 || ^10.0.0",
-        "drupal/devel": "^5.0'",
+        "drupal/devel": "^5.0",
         "ergebnis/composer-normalize": "^2.28",
         "friendsoftwig/twigcs": "^6.2",
         "metadrop/grumphp-drupal-check": "^0.4.0",
