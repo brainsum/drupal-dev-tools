@@ -55,14 +55,3 @@ as ```distfiles/grumphp.yml``` is only an import file and doesn't contain any ot
 For the pre-defined settings see ```distfiles/grumphp.yml``` and ```convention/grumphp.yml```.
 
 Note, we are also trying to create a ```phpcs.xml``` file in the project root. The source for that file is also in the ```distfiles``` folder.
-
-### Twig lint
-
-In addition to the pre-defined settings, this package also provides a custom ```twig lint``` task for GrumPHP.
-
-This is a somewhat modified copy from [asm89/twig-lint](https://github.com/asm89/twig-lint).
-
-The roadmap for this feature:
-- Update the code as necessary according to [symfony/twig-bridge](https://github.com/symfony/twig-bridge)
-- Show every error in the twig, not just the first one
-- Move to a separate package

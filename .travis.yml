@@ -3,9 +3,8 @@ dist: xenial
 language: php
 
 php:
-  - "7.2"
-  - "7.3"
-  - "7.4"
+  - "8.1"
+  - "8.2"
 
 jobs:
   fast_finish: true
@@ -23,7 +22,6 @@ before_install:
   - cp phpcs.dist.xml phpcs.xml
   - cp phpunit.dist.xml phpunit.xml
   - cp grumphp.dist.yml grumphp.yml
-  - cp phpstan.dist.neon phpstan.neon
 
 install:
   - composer install --no-suggest --no-progress --no-interaction --prefer-dist -o

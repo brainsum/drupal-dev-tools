@@ -6,6 +6,5 @@
 /phpcs.xml
 /grumphp.yml
 /phpunit.xml
-/phpstan.neon
 
 /composer.lock
