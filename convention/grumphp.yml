@@ -1,5 +1,5 @@
 parameters:
-  webroot: './web'
+  webroot: 'web'
   git_commit_message_matchers:
     Must contain JIRA issue number: '/^([A-Z]\-(\d+ ))+\| [A-Za-z]+[A-Za-z\d\s\.]+(.*)\.{1}$/s'
   exec_grumphp_command: docker-compose run --rm -T php
@@ -75,7 +75,7 @@ grumphp:
     phpcpd:
       directory:
         - '%webroot%/*/custom'
-        - ./tests
+        - 'tests'
       triggered_by:
         - php
         - inc
@@ -90,7 +90,8 @@ grumphp:
       triggered_by: [ 'twig' ]
       exclude: [
         'vendor',
-        'web/core',
-        'web/modules/contrib',
-        'web/themes/contrib',
+        '%webroot%/core',
+        '%webroot%/libraries',
+        '%webroot%/modules/contrib',
+        '%webroot%/themes/contrib',
       ]
