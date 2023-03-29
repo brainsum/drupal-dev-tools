@@ -1,6 +1,4 @@
-parameters:
-  bin_dir: "./vendor/bin"
-  git_dir: "."
+grumphp:
   tasks:
     composer: ~
     composer_normalize: ~
@@ -66,12 +64,6 @@ parameters:
         - 'test'
         - 'profile'
         - 'theme'
-    securitychecker:
-      lockfile: ./composer.lock
-      format: 'json'
-      end_point: ~
-      timeout: ~
-      run_always: false
     yamllint:
       whitelist_patterns: []
       ignore_patterns: []
