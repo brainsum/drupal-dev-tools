@@ -44,7 +44,12 @@
         }
     },
     "extra": {
-        "class": "Brainsum\\DrupalDevTools\\Composer\\Plugin\\DevToolsPlugin"
+        "class": "Brainsum\\DrupalDevTools\\Composer\\Plugin\\DevToolsPlugin",
+        "patches": {
+            "phpro/grumphp": {
+                "Php 8.1 deprecated warnings patch": "./patches/grumphp-php8.1-deprecated.patch"
+            }
+        }
     },
     "scripts": {
         "post-install-cmd": [
