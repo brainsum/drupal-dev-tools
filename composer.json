@@ -15,19 +15,6 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "metadrop/grumphp-drupal-check",
-                "type": "library",
-                "version": "0.4.0",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/Metadrop/grumphp-drupal-check.git",
-                    "reference": "05a70192155a21030ff63642035b531c88ccd45e"
-                }
-            }
         }
     ],
     "suggest": {
@@ -57,12 +44,7 @@
         }
     },
     "extra": {
-        "class": "Brainsum\\DrupalDevTools\\Composer\\Plugin\\DevToolsPlugin",
-        "patches": {
-            "metadrop/grumphp-drupal-check": {
-                "Allow for more recent versions of grumphp": "https://patch-diff.githubusercontent.com/raw/Metadrop/grumphp-drupal-check/pull/10.diff"
-            }
-        }
+        "class": "Brainsum\\DrupalDevTools\\Composer\\Plugin\\DevToolsPlugin"
     },
     "scripts": {
         "post-install-cmd": [
