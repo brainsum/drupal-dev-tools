@@ -30,8 +30,7 @@ grumphp:
       enforce_single_lined_subject: true
       max_body_width: 72
       max_subject_width: 60
-      matchers:
-        Must contain JIRA issue number: '/^([A-Z]\-(\d+ ))+\| [A-Za-z]+[A-Za-z\d\s\.]+(.*)\.{1}$/s'
+      matchers: '%git_commit_message_matchers%'
       case_insensitive: false
       multiline: true
       additional_modifiers: ''
