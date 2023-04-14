@@ -1,4 +1,4 @@
-# Brainsum dev tools for Drupal 8
+# Brainsum dev tools for Drupal 9
 
 [![Build Status](https://travis-ci.org/brainsum/drupal-dev-tools.svg?branch=master)](https://travis-ci.org/brainsum/drupal-dev-tools)
 
@@ -17,7 +17,7 @@ Note: This package is not going to overwrite existing ones, but it might not wor
 
 In your project, simply use
 
-```composer require --dev brainsum/drupal-dev-tools```
+```composer require --dev brainsum/drupal-dev-tools:^3.0```
 
 ### Settings
 #### Extend
