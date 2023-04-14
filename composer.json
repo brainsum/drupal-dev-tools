@@ -51,12 +51,7 @@
         "sort-packages": true
     },
     "extra": {
-        "class": "Brainsum\\DrupalDevTools\\Composer\\Plugin\\DevToolsPlugin",
-        "patches": {
-            "phpro/grumphp": {
-                "Php 8.1 deprecated warnings patch": "https://raw.githubusercontent.com/brainsum/drupal-dev-tools/3.x/patches/grumphp-php8.1-deprecated.patch"
-            }
-        }
+        "class": "Brainsum\\DrupalDevTools\\Composer\\Plugin\\DevToolsPlugin"
     },
     "scripts": {
         "post-install-cmd": [
