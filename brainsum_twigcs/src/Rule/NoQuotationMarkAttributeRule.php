@@ -23,14 +23,17 @@ class NoQuotationMarkAttributeRule extends AbstractRule implements RuleInterface
         Token::VAR_START_TYPE === $tokens->look(Lexer::NEXT_TOKEN)->getType() &&
         Token::WHITESPACE_TYPE === $tokens->look(2)->getType() &&
         Token::NAME_TYPE === $tokens->look(3)->getType()) {
+            $quots = substr_count(strstr($token->getValue(), '<'), '"');
 
-        $violations[] = $this->createViolation(
-          $tokens->getSourceContext()->getPath(),
-          $token->getLine(),
-          $token->getColumn() + strlen($token->getValue()) + 1,
-          'Unsafe attribute value without quotation mark.'
-        );
-      }
+            if (!($quots % 2)) {
+              $violations[] = $this->createViolation(
+              $tokens->getSourceContext()->getPath(),
+              $tokens->look(Lexer::NEXT_TOKEN)->getLine(),
+              $tokens->look(Lexer::NEXT_TOKEN)->getColumn() + strlen($tokens->look(Lexer::NEXT_TOKEN)->getValue()) - 1,
+              'Unsafe attribute value without quotation mark.'
+              );
+            }
+        }
 
       $tokens->next();
     }
