@@ -9,7 +9,7 @@ grumphp:
     failed: vendor/phpro/grumphp/resources/ascii/failed.txt
     succeeded: vendor/phpro/grumphp/resources/ascii/succeeded.txt
   parallel:
-    enabled: enable
+    enabled: true
   environment:
     variables:
       GRUMPHP_PROJECT_DIR: "."
