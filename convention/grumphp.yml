@@ -9,7 +9,7 @@ grumphp:
     failed: vendor/phpro/grumphp/resources/ascii/failed.txt
     succeeded: vendor/phpro/grumphp/resources/ascii/succeeded.txt
   parallel:
-    enabled: false #disabled because of php 8 deprecated warnings
+    enabled: enable
   environment:
     variables:
       GRUMPHP_PROJECT_DIR: "."
