@@ -65,7 +65,7 @@ grumphp:
         - info
         - txt
         - md
-        - js
+        - yml
         - test
       standard: Drupal,DrupalPractice
     drupalcheck:
