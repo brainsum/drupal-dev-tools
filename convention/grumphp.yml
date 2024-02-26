@@ -40,7 +40,9 @@ grumphp:
         - /([a-z]+-[A-Z]+-[\d]+)(-[a-zA-Z\d]+)*$/s
       additional_modifiers: ''
       allow_detached_head: true
-    composer: ~
+    composer:
+      no_check_all: true
+      strict: true
     composer_normalize: ~
     phplint:
       triggered_by:
