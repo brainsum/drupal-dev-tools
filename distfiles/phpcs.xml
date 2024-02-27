@@ -12,8 +12,8 @@
 
     <!-- Set ignore extensions. -->
     <!-- @see https://www.drupal.org/node/2867601#comment-12075633 -->
-    <arg name="ignore" value="*.css,*.md,*.txt,*.min.js"/>
-    <arg name="extensions" value="php,module,inc,profile,theme,install,js" />
+    <arg name="ignore" value="*.css,*.txt,*.js" />
+    <arg name="extensions" value="php,module,inc,profile,theme,install,yml,md" />
 
     <!-- Use colors in output. -->
     <arg name="colors"/>
@@ -28,6 +28,7 @@
     </rule>
 
     <file>web/modules/custom</file>
+    <file>web/themes/custom</file>
     <file>tests</file>
 
     <exclude-pattern>*/node_modules</exclude-pattern>
@@ -40,6 +41,6 @@
     <exclude-pattern>*.ico</exclude-pattern>
     <exclude-pattern>*/settings.php</exclude-pattern>
     <exclude-pattern>*/*.settings.php</exclude-pattern>
-    <exclude-pattern>*.min.js</exclude-pattern>
+    <exclude-pattern>*.js</exclude-pattern>
 
 </ruleset>
