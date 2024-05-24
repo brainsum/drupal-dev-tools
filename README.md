@@ -17,7 +17,7 @@ Note: This package is not going to overwrite existing ones, but it might not wor
 
 In your project, simply use
 
-```composer require --dev brainsum/drupal-dev-tools:^4.0```
+```composer require --dev brainsum/drupal-dev-tools:^5.0.0```
 
 ### Settings
 #### Extend
