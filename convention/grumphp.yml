@@ -44,6 +44,7 @@ grumphp:
       no_check_all: true
       strict: true
     composer_normalize: ~
+    securitychecker_composeraudit: ~
     phplint:
       triggered_by:
         - php
