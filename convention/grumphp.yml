@@ -71,7 +71,7 @@ grumphp:
         - yml
         - test
       standard: Drupal,DrupalPractice
-    drupalcheck:
+    drupal_check:
       drupal_root: ~
       deprecations: true
     yamllint: ~
