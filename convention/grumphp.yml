@@ -76,26 +76,4 @@ grumphp:
       deprecations: true
     yamllint: ~
     jsonlint: ~
-    phpcpd:
-      directory:
-        - '%webroot%/*/custom'
-        - 'tests'
-      triggered_by:
-        - php
-        - inc
-        - module
-        - install
-        - profile
-        - theme
-        - feature
-        - test
-    twigcs:
-      ruleset: 'Brainsum\Twigcs\Ruleset\DrupalTwigcs'
-      triggered_by: [ 'twig' ]
-      exclude: [
-        'vendor',
-        '%webroot%/core',
-        '%webroot%/libraries',
-        '%webroot%/modules/contrib',
-        '%webroot%/themes/contrib',
-      ]
+    twigcsfixer: ~
