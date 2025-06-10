@@ -17,7 +17,7 @@ Note: This package is not going to overwrite existing ones, but it might not wor
 
 In your project, simply use
 
-```composer require --dev brainsum/drupal-dev-tools:^5.0.0```
+```composer require --dev brainsum/drupal-dev-tools:^6.0.0```
 
 ### Settings
 #### Extend
@@ -46,7 +46,7 @@ E.g, phpcs.xml descriptions, namings, checked folders, etc.; grumphp.yml php ver
 
 If they, for some reason, don't get created, you can copy their contents from the files from ```vendor/brainsum/drupal-dev-tools/distfiles``` as needed.
 
-If you just want to use some settings from ```grumphp.yml```, not the whole thing, see ```convention/grumphp.yml```, 
+If you just want to use some settings from ```grumphp.yml```, not the whole thing, see ```convention/grumphp.yml```,
 as ```distfiles/grumphp.yml``` is only an import file and doesn't contain any other directives.
 
 ## GrumPHP
