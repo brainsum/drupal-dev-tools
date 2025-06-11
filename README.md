@@ -55,3 +55,35 @@ as ```distfiles/grumphp.yml``` is only an import file and doesn't contain any ot
 For the pre-defined settings see ```distfiles/grumphp.yml``` and ```convention/grumphp.yml```.
 
 Note, we are also trying to create a ```phpcs.xml``` file in the project root. The source for that file is also in the ```distfiles``` folder.
+
+## Twig Cs Fixer
+The ```.twig-cs-fixer.php``` file is also created in the project root copy of ```distfiles/.twig-cs-fixer.php```.
+Twig CS Fixer will run on web/modules/custom, web/themes/custom, and web/profiles/custom directories by default.
+
+We are using custom rules for Twig CS Fixer:
+
+#### NoRawFilterRule
+This rule disallows the use of the `raw` filter for variables, as it can lead to security vulnerabilities if not used carefully.
+```twig
+{{ variable|raw }}
+```
+You can disable this rule (before the line with `raw` filter) by adding the following comment in your Twig template:
+```twig
+{# @TwigCsIgnoreNoRawFilterRule #}
+```
+
+#### NoQuotationMarkAttributeRule
+This rule disallows the use of attributes without quotes, as it can lead to XSS vulnerabilities.
+```twig
+<div class="wrapper" id={{ item.label }}></div>
+```
+
+#### ForbiddenFunctionRule
+This rule disallows the use of certain Twig functions that are considered as debugging functions.
+- dump, dpm, kint, print_r, var_dump, var_export, vardumper
+ ```twig
+{{ dump() }}
+```
+
+For more information, see the [Twig CS Fixer documentation](
+https://github.com/VincentLanglet/Twig-CS-Fixer).
