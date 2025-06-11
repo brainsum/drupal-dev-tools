@@ -92,7 +92,7 @@ class Initialize {
   public function distFiles(): array {
     $this->finder
       ->files()
-      ->ignoreDotFiles(TRUE)
+      ->ignoreDotFiles(FALSE)
       ->ignoreUnreadableDirs(TRUE)
       ->ignoreVCS(TRUE)
       ->in(static::DISTFILES_DIR);

@@ -14,42 +14,40 @@ class NoQuotationMarkAttributeRule extends AbstractRule implements RuleInterface
    */
   public function process(int $tokenIndex, Tokens $tokens): void
   {
-    $token = $tokens->get($tokenIndex);
-    
-    // Only process TEXT tokens
-    if (Token::TEXT_TYPE !== $token->getType()) {
+    // Only process if this is a valid token
+    if (!$tokens->has($tokenIndex)) {
       return;
     }
-    
-    $content = $token->getValue();
-    
-    // Check for patterns like foo={{ var }} or foo= {{ var }}
-    if (str_ends_with(trim($content), '=')) {
-      // Check if next token is a variable start
+
+    $token = $tokens->get($tokenIndex);
+    $tokenValue = $token->getValue();
+
+    // Check for HTML attribute assignments without quotes
+    if ($tokenValue === '=') {
+      // Look ahead to see if the next token is a Twig variable
       $nextIndex = $tokenIndex + 1;
-      $nextToken = $tokens->get($nextIndex);
-      
-      // Skip whitespace tokens
-      while ($nextToken && $nextToken->getType() === Token::WHITESPACE_TYPE) {
-        $nextIndex++;
-        $nextToken = $tokens->offsetExists($nextIndex) ? $tokens->get($nextIndex) : null;
-      }
-      
-      if ($nextToken && $nextToken->getType() === Token::VAR_START_TYPE) {
-        // Count quotes to determine if we're inside an attribute value
-        $quoteCount = substr_count(strstr($content, '<'), '"');
-        
-        // If quote count is even, we're likely not inside quoted attribute value
-        if ($quoteCount % 2 === 0) {
-          $this->addError(
-            'Unsafe attribute value without quotation mark.',
-            $token
-          );
+
+      // Skip whitespace
+      while ($tokens->has($nextIndex)) {
+        $nextToken = $tokens->get($nextIndex);
+        // Skip whitespace tokens (type 14)
+        if ($nextToken->getType() !== Token::WHITESPACE_TYPE) {
+          break;
         }
+        $nextIndex++;
+      }
+
+      // Check if the next token is a Twig variable start ({{)
+      if ($tokens->has($nextIndex) && $tokens->get($nextIndex)->getValue() === '{{') {
+        // This is an unsafe attribute value without quotation mark
+        $this->addError(
+          'Unsafe attribute value without quotation mark.',
+          $token
+        );
       }
     }
   }
-  
+
   /**
    * {@inheritdoc}
    */

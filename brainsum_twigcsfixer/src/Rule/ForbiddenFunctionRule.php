@@ -46,6 +46,11 @@ class ForbiddenFunctionRule extends AbstractRule implements RuleInterface, Confi
    */
   public function process(int $tokenIndex, Tokens $tokens): void
   {
+    // Only process if this is a valid token
+    if (!$tokens->has($tokenIndex)) {
+      return;
+    }
+
     $token = $tokens->get($tokenIndex);
 
     // Check if token value is a forbidden function name
@@ -57,7 +62,7 @@ class ForbiddenFunctionRule extends AbstractRule implements RuleInterface, Confi
       );
     }
   }
-  
+
   /**
    * {@inheritdoc}
    */
