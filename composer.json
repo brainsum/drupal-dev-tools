@@ -20,7 +20,6 @@
         "mxr576/ddqg": "dev-no-insecure-versions",
         "mxr576/ddqg-composer-audit": "^1.2",
         "php-parallel-lint/php-parallel-lint": "^1.3",
-        "roave/security-advisories": "dev-latest",
         "vincentlanglet/twig-cs-fixer": "^3.0"
     },
     "suggest": {
